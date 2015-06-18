@@ -11,9 +11,9 @@ if(isset($_GET['tnum']))
 {
 	$file = "tPic/".$_GET['tnum'].".jpg";
 }
-if(isset($_ENV['OPENSHIFT_HOMEDIR']))
+if(isset($_ENV['OPENSHIFT_REPO_DIR']))
 {
-	$file = $_ENV['OPENSHIFT_HOMEDIR'].$file;
+	$file = $_ENV['OPENSHIFT_REPO_DIR'].$file;
 }
 
 echo($file);
