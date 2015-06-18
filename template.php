@@ -9,7 +9,7 @@ $img = "";
 $file = "tPic/".$_GET['tNum'].".jpg";
 if(isset($_ENV['OPENSHIFT_DATA_DIR']))
 {
-	$file = $_ENV['OPENSHIFT_DATA_DIR']."/".$file;
+	$file = $_ENV['OPENSHIFT_DATA_DIR'].$file;
 }
 
 echo($file);
