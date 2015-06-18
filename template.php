@@ -6,16 +6,20 @@
 	else
 {
 $img = "";
-$file = "tPic/".$_GET['tNum'].".jpg";
-if(isset($_ENV['OPENSHIFT_DATA_DIR']))
+$file = "";
+if(isset($_GET['tnum']))
 {
-	$file = $_ENV['OPENSHIFT_DATA_DIR'].$file;
+	$file = "tPic/".$_GET['tnum'].".jpg";
+}
+if(isset($_ENV['OPENSHIFT_HOMEDIR']))
+{
+	$file = $_ENV['OPENSHIFT_HOMEDIR'].$file;
 }
 
 echo($file);
-if(isset($_GET['tNum']) && is_file($file))
+if(isset($_GET['tnum']) && is_file($file))
 {
-	$img = "<img src=\"tPic/".$_GET['tNum'].".jpg\" />"; 
+	$img = "<img src=\"tPic/".$_GET['tnum'].".jpg\" />"; 
 }
 $GLOBALS['output'] = "
 
@@ -23,7 +27,7 @@ $GLOBALS['output'] = "
 <html>
 <body>
 <p>
-Territory &#35;:{[tNum]}
+Territory &#35;:{[tnum]}
 </p>
 ".$img."
 <p>
