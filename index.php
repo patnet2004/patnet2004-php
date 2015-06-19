@@ -4,7 +4,7 @@
 	require("template.php");
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
-		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315ILBv","php");
+		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315lLBv","php");
 		if(!$mysql)
 		{
 			die("mysql failed!");
