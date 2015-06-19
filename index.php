@@ -24,12 +24,12 @@
 		if($row[2] == "1")
 		{
 			$GLOBALS['completed'] = "completed";
-			$GLOBALS['disabled'] = "disabled";
+			//$GLOBALS['disabled'] = "disabled";
 		}
 		else
 		{
 			$GLOBALS['completed'] = "";
-			$GLOBALS['disabled'] = "";
+			//$GLOBALS['disabled'] = "";
 		}
 	}
 

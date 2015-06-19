@@ -24,20 +24,14 @@ if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
 {
 	$style = "style=\"background-color:green\"";
 	$status = "complete";
+	$disabled = "disabled=\"disabled\"";
 }
 else
 {
 	$style = "style=\"background-color:red\"";
 	$status = "not complete";
-}
-if(isset($GLOBALS['diabled']) && $GLOBALS['disabled'] == "disabled")
-{
-	$disabled = "disabled=\"disabled\"";
-}
-else
-{
 	$disabled = "";
-} 
+}
 if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "")
 {
 
