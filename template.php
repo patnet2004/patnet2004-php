@@ -20,7 +20,7 @@ if(isset($_GET['tnum']) && is_file($file))
 	$img = "<img src=\"tPic/".$_GET['tnum'].".jpg\" />"; 
 }
 $status = "";
-if(isset($completed) && $completed == "completed")
+if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
 {
 	$style = "style=\"background-color:green\"";
 	$status = "complete";
@@ -38,18 +38,48 @@ $GLOBALS['output'] = "
 <!DOCTYPE html>
 <html>
 <body>
-<p>
+<p align=\"center\" style=\"font-size:150%\">
 Territory &#35;: ".$_GET['tnum']."</br>
 Status: ".$status."
 </p>
 <p>
+<form action=\"\" method=\"post\">
+<table align=\"center\">
+<tr>
+<br/>
+<td ".$style." align=\"center\">
+".$img."
+<br/>
+</td>
+</tr>
+<tr>
+<td style=\"background-color:lightgrey\" align=\"center\" valign=\"middle\">
+Check in Territory:<br/>
+<br/>
 <table>
 <tr>
-<td ".$style.">
-".$img."
+<td valign=\"top\">
+Name:<br/>
+<input type=\"text\" name=\"name\" />
+</td>
+<td>
+Comments:<br/>
+<textarea name=\"comments\" cols=\"50\" rows=\"10\"/>
+</textarea>
+</td>
+<td valign=\"top\">
+<br/>
+<input type=\"submit\" name=\"complete\" value=\"Mark Complete\"/>
+
 </td>
 </tr>
 </table>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+</form>
 </p>
 </body>
 </html>
