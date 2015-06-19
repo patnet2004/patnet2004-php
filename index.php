@@ -37,7 +37,7 @@ require("template.php");
 
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
-		$sql = "INSERT INTO territories (`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','1')";
+		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','1')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
 		//echo($sql);
 		//echo("<br/>");
