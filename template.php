@@ -30,6 +30,14 @@ else
 	$style = "style=\"background-color:red\"";
 	$status = "not complete";
 }
+if(isset($GLOBALS['diabled']) && $GLOBALS['disabled'] == "disabled")
+{
+	$disabled = "disabled=\"disabled\"";
+}
+else
+{
+	$disabled = "";
+} 
 if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "")
 {
 
@@ -69,7 +77,7 @@ Comments:<br/>
 </td>
 <td valign=\"top\">
 <br/>
-<input type=\"submit\" name=\"complete\" value=\"Mark Complete\"/>
+<input type=\"submit\" name=\"complete\" value=\"Mark Complete\" ".$disabled."/>
 
 </td>
 </tr>
