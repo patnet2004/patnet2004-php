@@ -39,15 +39,16 @@ require("template.php");
 	{
 		$sql = "INSERT INTO territories (`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','1')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
-		echo($sql);
-		echo("<br/>");
-		echo("Campaign begins 6-19-2015!");
+		//echo($sql);
+		//echo("<br/>");
+		//echo("Campaign begins 6-19-2015!");
 		if(isset($mysql) && $mysql)
 		{
 			$results = mysql_query($sql);
 			if($result)
 			{
-				echo("Territory marked completed!<br/>");
+				//echo("Territory marked completed!<br/>");
+				header('Location:'.$_SERVER['REQUEST_URI']);
 			}
 		}
 	}
