@@ -5,6 +5,10 @@
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
 		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315ILBv","php");
+		if(!$mysql)
+		{
+			die("mysql failed!");
+		}
 	}
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
@@ -16,5 +20,8 @@
 	{
 		echo($GLOBALS['output']);
 	}
-	
+	if(isset($mysql) && $mysql)
+	{
+		mysql_close($mysql);
+	}
 ?>
