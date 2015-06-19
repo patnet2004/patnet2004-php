@@ -17,7 +17,7 @@
 		$result = mysql_query($sql);
 		if(!$result)
 		{
-			die($sql);
+			echo($sql);
 		}
 		$row = mysql_fetch_row($result);
 		echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
