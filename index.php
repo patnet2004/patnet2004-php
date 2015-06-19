@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	$_SESSION['IN_START'] = "started";
-	require("template.php");
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
 		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315lLBv","php");
@@ -33,6 +32,9 @@
 			$GLOBALS['disabled'] = "";
 		}
 	}
+
+require("template.php");
+
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
 		$sql = "INSERT INTO territories (`tNum`,`tName`,`tComment`,`tComplete`) VALUES(`".$_GET['tnum']."`,`".$_POST['name']."`,`".$_POST['comments']."`,`1`)";
