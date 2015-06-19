@@ -13,14 +13,15 @@
 	}
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && isset($mysql) && $mysql)
 	{
-		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum=`".$_GET['tnum']."`";
+		//$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum=`".$_GET['tnum']."`";
+		$sql="SELECT * FROM territories";
 		$result = mysql_query($sql);
 		if(!$result)
 		{
 			echo($sql);
 		}
 		$row = mysql_fetch_row($result);
-		echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
+		echo($row[1]."<br/>".$row[3]."<br/>".$row[4]);
 		if($row[2] == "1")
 		{
 			$GLOBALS['completed'] = "completed";
