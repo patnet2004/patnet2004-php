@@ -14,7 +14,7 @@
 	}
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && isset($mysql) && $mysql)
 	{
-		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum=`".$_GET['tnum']."`";
+		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		$result = mysql_query($sql);
 		if(!$result)
 		{
