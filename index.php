@@ -13,7 +13,7 @@
 	}
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && isset($mysql) && $mysql)
 	{
-		$sql = "SELECT tName,tComment,tComplete FROM territories WHERE tNum=`".$_GET['tnum']."`";
+		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum=`".$_GET['tnum']."`";
 		$result = mysql_query($sql);
 		if(!$result)
 		{
@@ -34,7 +34,7 @@
 	}
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
-		$sql = "INSERT INTO territories (tNum,tName,tComment,tComplete) VALUES(`".$_GET['tnum']."`,`".$_POST['name']."`,`".$_POST['comments']."`,`1`)";
+		$sql = "INSERT INTO territories (`tNum`,`tName`,`tComment`,`tComplete`) VALUES(`".$_GET['tnum']."`,`".$_POST['name']."`,`".$_POST['comments']."`,`1`)";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
 		echo($sql);
 		echo("<br/>");
