@@ -32,6 +32,14 @@ else
 	$status = "not complete";
 	$disabled = "";
 }
+if(isset($GLOBALS['diabled']) && $GLOBALS['disabled'] != "")
+{
+	
+}
+else
+{
+	$disabled = "";
+} 
 if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "")
 {
 
@@ -87,5 +95,41 @@ Comments:<br/>
 </html>
 
 ";
+}/*
+else
+{
+
+	$GLOBALS['output'] = "<!DOCTYPE html>
+<html>
+<body>
+<p align=\"center\"><br/>
+Arlington Congregation Tract Work Status:<br/>
+<table align=\"center\">
+<tr><td>
+<table align=\"center\">
+<tr><td>Group 1</td></tr>
+";
+for($i=0;$i<17;$i=$i+1)
+{
+	$GLOBALS['output'] = $GLOBALS['output']."<tr><td style=\"background-color:lightgrey\" align=\"center\">".($i+1)."</td></tr>";
 }
+$GLOBALS['output'] = $GLOBALS['output']."</table></td><td><table align=\"center\">
+<tr><td>Group 2</td></tr>";
+for($i=0;$i<17;$i=$i+1)
+{
+	$GLOBALS['output'] = $GLOBALS['output']."<tr><td style=\"background-color:lightgrey\" align=\"center\">".($i+18)."</td></tr>";
+}
+
+$GLOBALS['output'] = $GLOBALS['output']."</table>
+<td>
+<table align=\"center\"><tr><td>Group 3</td></tr>";
+for($i=0;$i<17;$i=$i+1)
+{
+	$GLOBALS['output'] = $GLOBALS['output']."<tr><td style=\"background-color:lightgrey\" align=\"center\">".($i+35)."</td></tr>";
+}
+
+$GLOBALS['output'] = $GLOBALS['output']."</td>
+</td></tr></table></p></body></html>";
+}*/
+
 }
