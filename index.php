@@ -5,6 +5,7 @@
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
 		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315lLBv","php");
+	mysql_select_db("php");
 		if(!$mysql)
 		{
 			die("failed to reach db please contact Patrick McDermott at 951-675-6109, Thanks.");
