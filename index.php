@@ -80,7 +80,7 @@ require("template.php");
 				$count = $count + 1;
 				
 			}
-			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".($count + 1)." territories have been scanned in!",$GLOBALS['output']);
+			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
 
 		}
 		echo($GLOBALS['output']);
