@@ -71,6 +71,7 @@ require("template.php");
 	{
 		if(isset($mysql) && $mysql)
 		{
+/*
 			$sql = "SELECT DISTINCT tNum FROM territories";
 			$results = mysql_query($mysql);
 			$output = array();
@@ -82,7 +83,7 @@ require("template.php");
 			}
 			
 			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count. "Territories have been scanned in!",$GLOBALS['output']);
-
+*/
 		}
 		echo($GLOBALS['output']);
 	}
