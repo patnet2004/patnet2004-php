@@ -88,9 +88,13 @@ Comments:<br/>
 <br/>
 </td>
 </tr>
+<tr>
+<td align=\"center\">
+<!--{[count_update]}-->
+</td>
+</tr>
 </table>
 </form>
-<!--{[count_update]}-->
 </p>
 </body>
 </html>
