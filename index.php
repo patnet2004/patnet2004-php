@@ -11,7 +11,7 @@
 		}
 		
 	}
-	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && isset($mysql) && $mysql)
+	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		$result = mysql_query($sql);
@@ -37,7 +37,7 @@ require("template.php");
 
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
-		if($_POST['name'] != "")
+		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
 		{
 		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','1')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
@@ -56,11 +56,33 @@ require("template.php");
 		}
 		else
 		{
+			if($_POST['name'] == "")
+			{
 			echo("<h2><p align=\"center\"><font color=\"red\">**please enter a name**</font></p></h2>");
+			}
+			if($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66)
+			{
+				echo("<h2><p align=\"center\"><font color=\"red\">**sorry your territory number is out of range**</font></p></h2>");
+
+			}
 		}
 	}
 	if(isset($GLOBALS['output']))
 	{
+		if(isset($mysql) && $mysql)
+		{
+			$sql = "SELECT DISTINCT tNum FROM territories";
+			$results = mysql_query($mysql);
+			$output = array();
+			$count = 0;
+			for($i = 0; $row = mysql_fetch_row; $i = $i+1)
+			{
+				$output[$i] = $row[0];
+				$count = $i + 1;
+			}
+			
+			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count. "Territories have been scanned in!",$GLOBALS['output']);
+		}
 		echo($GLOBALS['output']);
 	}
 	if(isset($mysql) && $mysql)
