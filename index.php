@@ -82,6 +82,8 @@ require("template.php");
 			}
 			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
 
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
+
 		}
 		echo($GLOBALS['output']);
 	}

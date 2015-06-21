@@ -90,6 +90,7 @@ Comments:<br/>
 </tr>
 </table>
 </form>
+<!--{[count_update]}-->
 </p>
 </body>
 </html>
