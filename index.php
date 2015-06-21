@@ -76,7 +76,7 @@ require("template.php");
 			$results = mysql_query($mysql);
 			$output = array();
 			$count = 0;
-			for($i = 0; $row = mysql_fetch_row; $i = $i+1)
+			for($i = 0; $row = mysql_fetch_row($results); $i = $i+1)
 			{
 				$output[$i] = $row[0];
 				$count = $i + 1;
