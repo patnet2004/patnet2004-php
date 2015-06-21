@@ -72,7 +72,7 @@ require("template.php");
 		if(isset($mysql) && $mysql)
 		{
 
-			$sql = "SELECT DISTINCT tNum FROM territories";
+			$sql = "SELECT DISTINCT `tNum` FROM `territories`";
 			$results = mysql_query($mysql);
 			$count = 0;
 			while($row = mysql_fetch_row($results))
