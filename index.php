@@ -43,7 +43,7 @@ require("template.php");
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
 		//echo($sql);
 		//echo("<br/>");
-		//echo("Campaign begins 6-19-2015!");
+		echo("Campaign begins 2-27-2016!"); //<!-- COMMENT OUT TO START
 			if(isset($mysql) && $mysql)
 			{
 				$results = mysql_query($sql);
@@ -107,7 +107,7 @@ for($i = 50; $i < 66; $i++)
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
 
 		}
-		echo($GLOBALS['output']);
+		//<!-- UNDO TO OPEN echo($GLOBALS['output']);
 	}
 	if(isset($mysql) && $mysql)
 	{
