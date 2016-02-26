@@ -11,6 +11,16 @@
 		}
 		
 	}
+
+if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
+{
+	
+}
+else
+{
+	die("Campaign begins 6-19-2015!");
+}
+
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum='".$_GET['tnum']."'";
