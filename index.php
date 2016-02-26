@@ -69,6 +69,28 @@ require("template.php");
 	}
 	if(isset($GLOBALS['output']))
 	{
+		$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table style=\"width:100%\" border=\"1\" ><tr align=\"top\"><td>Group 1<br/>\n<table>\n<!--{[group1_output]}--></table>\n</td><td>Group 2<br/>\n<table>\n<!--{[group2_output]}--></table>\n</td><td>Group 3<br/>\n<table>\n<!--{[group3_output]}--></table>\n</td><td>Group 4<br/>\n<table>\n<!--{[group4_output]}--></table>\n</td></tr></table><!--{[output]}-->",$GLOBALS['output']);
+
+for($i = 0; $i < 17; $i++)
+{
+	$GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr><td><a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 17; $i < 34; $i++)
+{
+	$GLOBALS['output'] = str_replace("<!--{[group2_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group2_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 34; $i < 50; $i++)
+{
+	$GLOBALS['output'] = str_replace("<!--{[group3_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group3_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 50; $i < 66; $i++)
+{
+	$GLOBALS['output'] = str_replace("<!--{[group4_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group4_output]}-->",$GLOBALS['output']);
+}
+
 		if(isset($mysql) && $mysql)
 		{
 
