@@ -14,12 +14,6 @@
 
 if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 {
-	
-}
-else
-{
-	die("Campaign begins 6-19-2015!");
-}
 
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
 	{
@@ -119,6 +113,11 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." te
 		}
 		echo($GLOBALS['output']);
 	}
+}
+else
+{
+	die("Campaign begins 6-19-2015!");
+}
 	if(isset($mysql) && $mysql)
 	{
 		mysql_close($mysql);
