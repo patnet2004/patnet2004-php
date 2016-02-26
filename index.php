@@ -116,7 +116,7 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." te
 }
 else
 {
-	die("Campaign begins 6-19-2015!");
+	die("Campaign begins 2-27-2016!");
 }
 	if(isset($mysql) && $mysql)
 	{
