@@ -33,7 +33,8 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 		{
 			echo($sql);
 		}
-		$row = mysql_fetch_row($result);
+		while($row = mysql_fetch_row($result))
+		{
 		//echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
 		if($row[2] == "1")
 		{
@@ -42,12 +43,19 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 		}
 		else if($row[2] == "2")
 		{
-			$GLOBALS['completed'] = "partial";
+			if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
+			{
+				
+			}
+			{
+				$GLOBALS['completed'] = "partial";
+			}
 		}
 		else
 		{
 			$GLOBALS['completed'] = "";
 			//$GLOBALS['disabled'] = "";
+		}
 		}
 	}
 
@@ -122,9 +130,20 @@ for($i = 50; $i < 66; $i++)
 			}
 			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
 
-$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in.<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
-			//$sql = "SELECT 
+			$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='1'";
+			 $results = mysql_query($sql);
+			$row = mysql_fetch_row($results);
+			
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
+
+
+$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='2'";
+		 $results = mysql_query($sql);
+		$row = mysql_fetch_row($results);
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Partially completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
+
 
 		}
 		echo($GLOBALS['output']);
