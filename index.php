@@ -11,6 +11,16 @@
 		}
 		
 	}
+	else
+	{
+		$mysql = 			mysql_connect("localhost","root","amdturion64","php");
+	mysql_select_db("php");
+		if(!$mysql)
+		{
+			die("failed to reach db please contact Patrick McDermott at 951-675-6109, Thanks.");
+		}
+
+	}
 
 if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 {
@@ -113,6 +123,8 @@ for($i = 50; $i < 66; $i++)
 			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
 
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
+
+			//$sql = "SELECT 
 
 		}
 		echo($GLOBALS['output']);
