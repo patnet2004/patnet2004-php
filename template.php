@@ -92,10 +92,10 @@ name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
 <br/>
 <br/>
 Name:<br/>
-<input type=\"text\" name=\"name\" size=\"67\"/>
+<input type=\"text\" name=\"name\" style=\"width:500px\"/>
 <br/>
 Comments:<br/>
-<textarea name=\"comments\" cols=\"50\" rows=\"10\"/>
+<textarea name=\"comments\" cols=\"50\" rows=\"10\" style=\"width:500px\" />
 </textarea>
 </td>
 <td valign=\"top\">
