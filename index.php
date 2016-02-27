@@ -130,7 +130,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 	{
 		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
 		{
-		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','1')";
+		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".addslashes($_POST['name'])."','".addslashes($_POST['comments'])."','1')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
 		//echo($sql);
 		//echo("<br/>");
