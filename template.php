@@ -80,7 +80,8 @@ Comments:<br/>
 <td valign=\"top\">
 <br/>
 <input type=\"submit\" name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
-
+<br/>
+<br/>
 <input type=\"submit\" name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
 </td>
 </tr>
