@@ -89,6 +89,43 @@ require("template.php");
 
 
 
+if(isset($_POST['partiallyComplete']) && isset($_POST['name']) && isset($_GET['tnum']))
+		{
+if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
+		{
+		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','2')";
+		//echo(	$_POST['complete']."<br/>".$_POST['name']);
+		//echo($sql);
+		//echo("<br/>");
+		//echo("Campaign begins 6-19-2015!");
+			if(isset($mysql) && $mysql)
+			{
+				$results = mysql_query($sql);
+				if($result)
+				{
+				//echo("Territory marked completed!<br/>");
+					header('Location:'.$_SERVER['REQUEST_URI']);
+				}
+			}
+			}
+
+		}
+		else
+		{
+			if(isset($_POST['partiallyComplete']) && isset($_POST['name']) && $_POST['name'] == "")			{
+			//echo("<h2><p align=\"center\"><font color=\"red\">**please enter a name**</font></p></h2>");
+			}
+			if($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66)
+			{
+				//echo("<h2><p align=\"center\"><font color=\"red\">**sorry your territory number is out of range**</font></p></h2>");
+
+			}
+		}
+
+
+
+
+
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
 		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
