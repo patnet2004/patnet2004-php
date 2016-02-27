@@ -64,25 +64,60 @@ Status: ".$status."
 </tr>
 <tr>
 <td style=\"background-color:lightgrey\" align=\"center\" valign=\"middle\">
-<h3>Check in Territory:</h3><br/>
-<br/>
+<h3>Check in Territory:</h3>
 <table>
 <tr>
 <td valign=\"top\">
-Name:<br/>
-<input type=\"text\" name=\"name\" />
+<input type=\"submit\" style=\"
+background:#fff0b3;
+	background:-moz-linear-gradient(top,#fff0b3 0%,#e6b800 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff0b3),color-stop(100%,#e6b800));
+	background:-webkit-linear-gradient(top,#fff0b3 0%,#e6b800 100%);
+	background:-o-linear-gradient(top,#fff0b3 0%,#e6b800 100%);
+	background:-ms-linear-gradient(top,#fff0b3 0%,#e6b800 100%);
+	background:linear-gradient(top,#fff0b3 0%,#e6b800 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fff0b3', endColorstr='#e6b800',GradientType=0);
+	padding:10px 15px;
+	color:#ffffff;
+	text-shadow: -1px -1px #aaaaaa;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:16px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #e6b800\"
+name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
 </td>
 <td>
+<br/>
+<br/>
+Name:<br/>
+<input type=\"text\" name=\"name\" size=\"67\"/>
+<br/>
 Comments:<br/>
 <textarea name=\"comments\" cols=\"50\" rows=\"10\"/>
 </textarea>
 </td>
 <td valign=\"top\">
-<br/>
-<input type=\"submit\" name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
-<br/>
-<br/>
-<input type=\"submit\" name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
+<input type=\"submit\" style=\"
+background:#5CCD00;
+	background:-moz-linear-gradient(top,#5CCD00 0%,#4AA400 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#5CCD00),color-stop(100%,#4AA400));
+	background:-webkit-linear-gradient(top,#5CCD00 0%,#4AA400 100%);
+	background:-o-linear-gradient(top,#5CCD00 0%,#4AA400 100%);
+	background:-ms-linear-gradient(top,#5CCD00 0%,#4AA400 100%);
+	background:linear-gradient(top,#5CCD00 0%,#4AA400 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#5CCD00', endColorstr='#4AA400',GradientType=0);
+	padding:10px 15px;
+	color:#fff;
+	text-shadow: -1px -1px #aaaaaa;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:16px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #459A00\"
+name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
 </td>
 </tr>
 </table>
