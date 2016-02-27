@@ -30,6 +30,10 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 			$GLOBALS['completed'] = "completed";
 			//$GLOBALS['disabled'] = "disabled";
 		}
+		else if($row[2] == "2")
+		{
+			$GLOBALS['completed'] = "partial";
+		}
 		else
 		{
 			$GLOBALS['completed'] = "";

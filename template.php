@@ -23,15 +23,22 @@ $status = "";
 if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
 {
 	$style = "style=\"background-color:green\"";
-	$status = "complete";
+	$status = "Complete";
 	$disabled = "disabled=\"disabled\"";
+}
+else if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "partial")
+{
+	$style = "style=\"background-color:yellow\"";
+	$status = "Partially Complete";
+	$disabled = "";
 }
 else
 {
 	$style = "style=\"background-color:red\"";
-	$status = "not complete";
+	$status = "Not Complete";
 	$disabled = "";
 }
+
 if(isset($GLOBALS['diabled']) && $GLOBALS['disabled'] != "")
 {
 	
