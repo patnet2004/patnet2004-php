@@ -22,19 +22,19 @@ if(isset($_GET['tnum']) && is_file($file))
 $status = "";
 if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
 {
-	$style = "style=\"background-color:green\"";
+	$style = "style=\"background-color:green; padding:15px 15px;\"";
 	$status = "Complete";
 	$disabled = "disabled=\"disabled\"";
 }
 else if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "partial")
 {
-	$style = "style=\"background-color:yellow\"";
+	$style = "style=\"background-color:#ffd633; padding:15px 15px;\"";
 	$status = "Partially Complete";
 	$disabled = "";
 }
 else
 {
-	$style = "style=\"background-color:red\"";
+	$style = "style=\"background-color:red; padding:15px 15px;\"";
 	$status = "Not Complete";
 	$disabled = "";
 }
