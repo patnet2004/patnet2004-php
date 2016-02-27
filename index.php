@@ -22,8 +22,8 @@
 
 	}
 
-if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
-{
+//if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
+//{
 
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
 	{
@@ -115,7 +115,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 			if(isset($_POST['partiallyComplete']) && isset($_POST['name']) && $_POST['name'] == "")			{
 			//echo("<h2><p align=\"center\"><font color=\"red\">**please enter a name**</font></p></h2>");
 			}
-			if($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66)
+			if(isset($_GET['tnum']) && ($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66))
 			{
 				//echo("<h2><p align=\"center\"><font color=\"red\">**sorry your territory number is out of range**</font></p></h2>");
 
@@ -228,11 +228,11 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Partially completed:
 		}
 		echo($GLOBALS['output']);
 	}
-}
-else
-{
-	die("Campaign begins 2-27-2016!");
-}
+//}
+//else
+//{
+//	die("Campaign begins 2-27-2016!");
+//}
 	if(isset($mysql) && $mysql)
 	{
 		mysql_close($mysql);
