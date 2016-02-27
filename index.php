@@ -174,7 +174,7 @@ if(isset($GLOBALS['partialComment']))
 $GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->","",$GLOBALS['output']);
 
 
-
+/*
 		$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table style=\"width:100%\" border=\"1\" ><tr align=\"top\"><td>Group 1<br/>\n<table>\n<!--{[group1_output]}--></table>\n</td><td>Group 2<br/>\n<table>\n<!--{[group2_output]}--></table>\n</td><td>Group 3<br/>\n<table>\n<!--{[group3_output]}--></table>\n</td><td>Group 4<br/>\n<table>\n<!--{[group4_output]}--></table>\n</td></tr></table><!--{[output]}-->",$GLOBALS['output']);
 
 for($i = 0; $i < 17; $i++)
@@ -196,7 +196,7 @@ for($i = 50; $i < 66; $i++)
 {
 	$GLOBALS['output'] = str_replace("<!--{[group4_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group4_output]}-->",$GLOBALS['output']);
 }
-
+*/
 		if(isset($mysql) && $mysql)
 		{
 
@@ -208,9 +208,9 @@ for($i = 50; $i < 66; $i++)
 				$count = $count + 1;
 				
 			}
-			$GLOBALS['output'] = str_replace("<!--{[output]}-->","So far ".$count." territories have been scanned in!",$GLOBALS['output']);
+			$GLOBALS['output'] = str_replace("<!--{[output]}-->","Territoies scanned:".$count,$GLOBALS['output']);
 
-$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." territories have been scanned in.<br/><!--{[count_update]}-->",$GLOBALS['output']);
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:".$count."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
 			$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='1'";
 			 $results = mysql_query($sql);
