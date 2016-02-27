@@ -64,7 +64,7 @@ Status: ".$status."
 </tr>
 <tr>
 <td style=\"background-color:lightgrey\" align=\"center\" valign=\"middle\">
-Check in Territory:<br/>
+<h3>Check in Territory:</h3><br/>
 <br/>
 <table>
 <tr>
@@ -79,8 +79,9 @@ Comments:<br/>
 </td>
 <td valign=\"top\">
 <br/>
-<input type=\"submit\" name=\"complete\" value=\"Mark Complete\" ".$disabled."/>
+<input type=\"submit\" name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
 
+<input type=\"submit\" name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
 </td>
 </tr>
 </table>
