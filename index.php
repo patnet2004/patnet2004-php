@@ -27,7 +27,7 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
 	{
-		$sql = "SELECT `tName`,`tComment`,`tComplete` FROM territories WHERE tNum='".$_GET['tnum']."'";
+		$sql = "SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		$result = mysql_query($sql);
 		if(!$result)
 		{
@@ -36,6 +36,32 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 		while($row = mysql_fetch_row($result))
 		{
 		//echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
+
+		if(isset($GLOBALS['completeComment']) && $row[2] == "1")
+		{
+			$GLOBALS['completeComment']=$GLOBALS['completeComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+		}
+		else if($row[2] == "1")
+		{
+			$GLOBALS['completeComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+		}
+		else
+		{
+		}
+
+	if(isset($GLOBALS['partialComment']) && $row[2] == "2")
+		{
+			$GLOBALS['partialComment']=$GLOBALS['partialComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+		}
+		else if($row[2] == "2")
+		{
+			$GLOBALS['partialComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+		}
+		else
+		{
+		}
+
+
 		if($row[2] == "1")
 		{
 			$GLOBALS['completed'] = "completed";
@@ -60,6 +86,8 @@ if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 	}
 
 require("template.php");
+
+
 
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
@@ -95,6 +123,21 @@ require("template.php");
 	}
 	if(isset($GLOBALS['output']))
 	{
+		
+if(isset($GLOBALS['completeComment']))
+{
+	$GLOBALS['output'] = str_replace("<!--{[complete_comments]}-->",$GLOBALS['completeComment']."<!--{[complete_comments]}-->",$GLOBALS['output']);		
+}
+$GLOBALS['output'] = str_replace("<!--{[complete_comments]}-->","",$GLOBALS['output']);
+
+if(isset($GLOBALS['partialComment']))
+{
+	$GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->",$GLOBALS['partialComment']."<!--{[partial_comments]}-->",$GLOBALS['output']);		
+}
+$GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->","",$GLOBALS['output']);
+
+
+
 		$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table style=\"width:100%\" border=\"1\" ><tr align=\"top\"><td>Group 1<br/>\n<table>\n<!--{[group1_output]}--></table>\n</td><td>Group 2<br/>\n<table>\n<!--{[group2_output]}--></table>\n</td><td>Group 3<br/>\n<table>\n<!--{[group3_output]}--></table>\n</td><td>Group 4<br/>\n<table>\n<!--{[group4_output]}--></table>\n</td></tr></table><!--{[output]}-->",$GLOBALS['output']);
 
 for($i = 0; $i < 17; $i++)
@@ -138,12 +181,12 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","So far ".$count." te
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
-
-$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='2'";
+/*
+$sql = "SELECT COUNT(DISTINCT `tNum`) FROM `territories` WHERE `tComplete`<'2'";
 		 $results = mysql_query($sql);
 		$row = mysql_fetch_row($results);
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Partially completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
-
+*/
 
 		}
 		echo($GLOBALS['output']);

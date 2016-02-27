@@ -95,6 +95,11 @@ background:#fff0b3;
 	-webkit-border-radius:5px;
 	border:1px solid #e6b800\"
 name=\"partiallyComplete\" value=\"Mark Partially Complete\" ".$disabled."/>
+<br/>
+<br/><br/>Partially Completed:<br/>
+<textarea name=\"partial_comments\" cols=\"50\" rows=\"10\" style=\"width:200px\" disabled=\"disabled\"/>
+<!--{[partial_comments]}-->
+</textarea>
 </td>
 <td>
 <br/>
@@ -126,6 +131,11 @@ background:#5CCD00;
 	-webkit-border-radius:5px;
 	border:1px solid #459A00\"
 name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
+<br/>
+<br/><br/>Fully Completed:<br/>
+<textarea name=\"complete_comments\" cols=\"50\" rows=\"10\" style=\"width:200px\" disabled=\"disabled\"/>
+<!--{[complete_comments]}-->
+</textarea>
 </td>
 </tr>
 </table>
