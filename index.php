@@ -450,7 +450,7 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:"
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
-$GLOBALS['output'] = str_replace("<!--{[status_report]}-->","Total Percent Complete: ".((float)($row[0]/66) * 100)."&#37;<br/><!--{[status_report]}-->",$GLOBALS['output']);
+$GLOBALS['output'] = str_replace("<!--{[status_report]}-->","Total Percent Complete: ".round((float)($row[0]/66) * 100,2)."&#37;<br/><!--{[status_report]}-->",$GLOBALS['output']);
 
 
 $GLOBALS['output'] = str_replace("<!--{[status_report_link]}-->","<a href=\"?=status\">Status Report</a>",$GLOBALS['output']);
