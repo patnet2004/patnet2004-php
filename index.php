@@ -450,6 +450,8 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:"
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","<a href=\"?=status\">Status Report</a>",$GLOBALS['output']);
+
 /*
 $sql = "SELECT COUNT(DISTINCT `tNum`) FROM `territories` WHERE `tComplete`<'2'";
 		 $results = mysql_query($sql);

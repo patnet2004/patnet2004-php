@@ -162,7 +162,7 @@ else
 		<!DOCTYPE html>
 		<html>
 		<head>
-		<title>Campaign Territory - Status</title>
+		<title>Campaign Territory - Status Report</title>
 		<style>
 		a:link
 		{
@@ -188,7 +188,7 @@ else
 		<body>
 		<div align=\"center\">
 		<p align=\"center\" style=\"font-size:150%\">
-		Campaign Territory - Status
+		Campaign Territory - Status Report
 		</p>
 		<!--{[output]}-->
 		</div>
