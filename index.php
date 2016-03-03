@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	$_SESSION['IN_START'] = "started";
+	$mysql = 0;
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
 		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315lLBv","php");
@@ -101,7 +102,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 			if(isset($mysql) && $mysql)
 			{
 				$results = mysql_query($sql);
-				if($result)
+				if($results)
 				{
 				//echo("Territory marked completed!<br/>");
 					header('Location:'.$_SERVER['REQUEST_URI']);
@@ -174,29 +175,260 @@ if(isset($GLOBALS['partialComment']))
 $GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->","",$GLOBALS['output']);
 
 
+if(isset($mysql) && $mysql)
+{
+
+
+$sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
+	$results = mysql_query($sql);
+	if($results)
+	{
+		while($row = mysql_fetch_row($results))
+		{
+			$GLOBALS['status'][$row[0]] = "2";
+				//echo($row[0]."<br/>");
+		}
+	}
+
+	$sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='1'";
+	$results = mysql_query($sql);
+	if($results)
+	{
+		while($row = mysql_fetch_row($results))
+		{
+			$GLOBALS['status'][$row[0]] = "1";
+				//echo($row[0]."<br/>");
+		}
+	}
+	//echo("<br/>");
+
 /*
-		$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table style=\"width:100%\" border=\"1\" ><tr align=\"top\"><td>Group 1<br/>\n<table>\n<!--{[group1_output]}--></table>\n</td><td>Group 2<br/>\n<table>\n<!--{[group2_output]}--></table>\n</td><td>Group 3<br/>\n<table>\n<!--{[group3_output]}--></table>\n</td><td>Group 4<br/>\n<table>\n<!--{[group4_output]}--></table>\n</td></tr></table><!--{[output]}-->",$GLOBALS['output']);
-
-for($i = 0; $i < 17; $i++)
-{
-	$GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr><td><a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
-}
-
-for($i = 17; $i < 34; $i++)
-{
-	$GLOBALS['output'] = str_replace("<!--{[group2_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group2_output]}-->",$GLOBALS['output']);
-}
-
-for($i = 34; $i < 50; $i++)
-{
-	$GLOBALS['output'] = str_replace("<!--{[group3_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group3_output]}-->",$GLOBALS['output']);
-}
-
-for($i = 50; $i < 66; $i++)
-{
-	$GLOBALS['output'] = str_replace("<!--{[group4_output]}-->","<tr><td>".($i + 1)."</td></tr>\n<!--{[group4_output]}-->",$GLOBALS['output']);
-}
+	foreach($GLOBALS['status'] as $i => $v)
+	{	
+		echo($v."-".$i."-<br/>");
+	}
 */
+
+//echo("???".$GLOBALS['status'][1]."<br/>");
+
+$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table align=\"top\" style=\"width:300px;padding:0;margin:0;border-collapse:collapse\">
+<tr >
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group1_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group2_output]}--></table>\n</td><td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group3_output]}--></table>\n</td><td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group4_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group5_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group6_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group7_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group8_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group9_output]}--></table>\n</td>
+<td valign=\"top\" text-align=\"top\"\">\n<table align=\"top\" style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group10_output]}--></table>\n</td>
+</tr></table><!--{[output]}-->",$GLOBALS['output']);
+
+for($i = 0; $i < 7; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 7; $i < 14; $i++)
+{
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+
+}
+
+
+	$GLOBALS['output'] = str_replace("<!--{[group2_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group2_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 14; $i < 21; $i++)
+{
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group3_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group3_output]}-->",$GLOBALS['output']);
+}
+
+for($i = 21; $i < 28; $i++)
+{
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group4_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group4_output]}-->",$GLOBALS['output']);
+}
+
+}
+
+for($i = 28; $i < 35; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group5_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group5_output]}-->",$GLOBALS['output']);
+}
+
+
+for($i = 35; $i < 42; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group6_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group6_output]}-->",$GLOBALS['output']);
+}
+
+
+for($i = 42; $i < 49; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group7_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group7_output]}-->",$GLOBALS['output']);
+}
+
+
+for($i = 49; $i < 56; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group8_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group8_output]}-->",$GLOBALS['output']);
+}
+
+
+for($i = 56; $i < 63; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group9_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group9_output]}-->",$GLOBALS['output']);
+}
+
+
+for($i = 63; $i < 66; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+
+}
+
+	$GLOBALS['output'] = str_replace("<!--{[group10_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group10_output]}-->",$GLOBALS['output']);
+}
+
+
 		if(isset($mysql) && $mysql)
 		{
 

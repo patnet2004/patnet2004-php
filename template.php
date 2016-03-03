@@ -161,8 +161,37 @@ else
 	$GLOBALS['output'] = "
 		<!DOCTYPE html>
 		<html>
+		<head>
+		<title>Campaign Territory - Status</title>
+		<style>
+		a:link
+		{
+			color: white;
+			text-decoration:none;
+			text-shadow: -1px 0px #000000,1px 0px 					#000000, 0px -1px #000000, 0px 1px #000000;			}
+		a:visited
+		{
+			color: white;
+			text-decoration:none;
+			text-shadow: -1px 0px #000000,1px 0px 					#000000, 0px -1px #000000, 0px 1px #000000;
+		}
+
+		a:hover
+		{
+			color: white;
+			text-decoration:underline;
+			text-shadow: -1px 0px #000000,1px 0px 					#000000, 0px -1px #000000, 0px 1px #000000;
+		}
+
+		</style>
+		</head>
 		<body>
+		<div align=\"center\">
+		<p align=\"center\" style=\"font-size:150%\">
+		Campaign Territory - Status
+		</p>
 		<!--{[output]}-->
+		</div>
 		</body>
 		</html>
 	";
