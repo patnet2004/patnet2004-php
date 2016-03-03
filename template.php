@@ -146,6 +146,7 @@ name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
 <tr>
 <td align=\"center\">
 <!--{[count_update]}-->
+<!--{[status_report_link]}-->
 </td>
 </tr>
 </table>
@@ -188,9 +189,11 @@ else
 		<body>
 		<div align=\"center\">
 		<p align=\"center\" style=\"font-size:150%\">
-		Campaign Territory - Status Report
+		Campaign Territory - Status Report<br/>
 		</p>
+<!--{[status_report]}-->
 		<!--{[output]}-->
+		<!--{[count_update]}-->
 		</div>
 		</body>
 		</html>

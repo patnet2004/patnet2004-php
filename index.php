@@ -440,7 +440,7 @@ else
 				$count = $count + 1;
 				
 			}
-			$GLOBALS['output'] = str_replace("<!--{[output]}-->","Territoies scanned:".$count,$GLOBALS['output']);
+			//$GLOBALS['output'] = str_replace("<!--{[output]}-->","Territoies scanned:".$count,$GLOBALS['output']);
 
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:".$count."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
@@ -450,7 +450,10 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:"
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
-$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","<a href=\"?=status\">Status Report</a>",$GLOBALS['output']);
+$GLOBALS['output'] = str_replace("<!--{[status_report]}-->","Total Percent Complete: ".((float)($row[0]/66) * 100)."&#37;<br/><!--{[status_report]}-->",$GLOBALS['output']);
+
+
+$GLOBALS['output'] = str_replace("<!--{[status_report_link]}-->","<a href=\"?=status\">Status Report</a>",$GLOBALS['output']);
 
 /*
 $sql = "SELECT COUNT(DISTINCT `tNum`) FROM `territories` WHERE `tComplete`<'2'";
