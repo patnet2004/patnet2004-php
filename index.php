@@ -200,6 +200,19 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 				//echo($row[0]."<br/>");
 		}
 	}
+
+	$sql = "SELECT DISTINCT `tNum`,`tName` FROM `tcheckout`";
+	$results = mysql_query($sql);
+	if($results)
+	{
+		while($row = mysql_fetch_row($results))
+		{
+			$GLOBALS['checkout'][$row[0]] = "1";
+			$GLOBALS['checkoutname'][$row[0]] = $row[1];
+				//echo($row[0]."<br/>");
+		}
+	}
+
 	//echo("<br/>");
 
 /*
@@ -211,16 +224,18 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 
 //echo("???".$GLOBALS['status'][1]."<br/>");
 
-$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table align=\"top\" style=\"width:300px;padding:0;margin:0;border-collapse:collapse\">
+$GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table align=\"top\" style=\"width:300px;padding:0;margin:0;border-collapse:separate\">
 <tr >
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group1_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group2_output]}--></table>\n</td><td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group3_output]}--></table>\n</td><td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group4_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group5_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group6_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group7_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group8_output]}--></table>\n</td>
-<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group9_output]}--></table>\n</td>
-<td valign=\"top\" text-align=\"top\"\">\n<table align=\"top\" style=\"width:75px;padding:0;margin:0;border-collapse:collapse\">\n<!--{[group10_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group1_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group2_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group3_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group4_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group5_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group6_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group7_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group8_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group9_output]}--></table>\n</td>
+<td valign=\"top\" text-align=\"top\"\">\n<table align=\"top\" style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group10_output]}--></table>\n</td>
 </tr></table><!--{[output]}-->",$GLOBALS['output']);
 
 for($i = 0; $i < 7; $i++)
@@ -228,35 +243,54 @@ for($i = 0; $i < 7; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;text-align:center;<!--{[border]}-->\">";
 
 }
 
-	$GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
+
+$GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
 }
 
 for($i = 7; $i < 14; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;<!--{[border]}-->\">";
 
+}
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
 }
 
 
@@ -267,17 +301,27 @@ for($i = 14; $i < 21; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group3_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group3_output]}-->",$GLOBALS['output']);
 }
@@ -286,17 +330,27 @@ for($i = 21; $i < 28; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group4_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group4_output]}-->",$GLOBALS['output']);
 }
@@ -308,17 +362,27 @@ for($i = 28; $i < 35; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group5_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group5_output]}-->",$GLOBALS['output']);
 }
@@ -329,17 +393,27 @@ for($i = 35; $i < 42; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group6_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group6_output]}-->",$GLOBALS['output']);
 }
@@ -350,17 +424,27 @@ for($i = 42; $i < 49; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group7_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group7_output]}-->",$GLOBALS['output']);
 }
@@ -371,17 +455,27 @@ for($i = 49; $i < 56; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group8_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group8_output]}-->",$GLOBALS['output']);
 }
@@ -392,17 +486,27 @@ for($i = 56; $i < 63; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group9_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group9_output]}-->",$GLOBALS['output']);
 }
@@ -413,21 +517,39 @@ for($i = 63; $i < 66; $i++)
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
-	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
 {
-	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 }
 else
 {
-	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;border:1px solid black\">";
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
 
 }
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid white;height:50px;width:50px",$statusColor);
+}
+
 
 	$GLOBALS['output'] = str_replace("<!--{[group10_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group10_output]}-->",$GLOBALS['output']);
 }
 
+if(isset($_GET['tnum']) && isset($GLOBALS['checkoutname'][$_GET['tnum']]))
+{
+	$GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Assigned to: ".$GLOBALS['checkoutname']	[$_GET['tnum']]."<br/>",$GLOBALS['output']);
+}
+else
+{
+		$GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Unassigned<br/>",$GLOBALS['output']);
+}
 
 		if(isset($mysql) && $mysql)
 		{

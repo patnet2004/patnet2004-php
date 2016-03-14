@@ -58,6 +58,7 @@ $GLOBALS['output'] = "
 <body>
 <p align=\"center\" style=\"font-size:150%\">
 Territory &#35;: ".$_GET['tnum']."</br>
+<!--{[assigned]}-->
 Status: ".$status."
 </p>
 <p>
