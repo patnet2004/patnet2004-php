@@ -1,3 +1,0 @@
-Too many arguments passed in: = :recursive
-Usage: rhc scp [<app> --] <action> <local_path> <remote_path>
-Pass '--help' to see the full list of options
