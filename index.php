@@ -498,7 +498,7 @@ else
 			}
 			//$GLOBALS['output'] = str_replace("<!--{[output]}-->","Territoies scanned:".$count,$GLOBALS['output']);
 
-$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned:".$count."<br/><!--{[count_update]}-->",$GLOBALS['output']);
+$GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned :".$count."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
 			$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='1'";
 			 $results = mysql_query($sql);
