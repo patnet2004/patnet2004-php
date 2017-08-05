@@ -511,17 +511,6 @@ $GLOBALS['output'] = str_replace("<!--{[status_report]}-->","Total Percent Compl
 
 $GLOBALS['output'] = str_replace("<!--{[status_report_link]}-->","<a href=\"?=status\">Status Report</a>",$GLOBALS['output']);
 
-
-if(isset($_GET['tnum']) && isset($GLOBALS['checkoutname'][$_GET['tnum']]))
-{
-       $GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Assigned to: ".$GLOBALS['checkoutname'] [$_GET['tnum']]."<br/>",$GLOBALS['output']);
-}
-else
-{
-               $GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Unassigned<br/>",$GLOBALS['output']);
-}
-
-
 /*
 $sql = "SELECT COUNT(DISTINCT `tNum`) FROM `territories` WHERE `tComplete`<'2'";
 		 $results = mysql_query($sql);
