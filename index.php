@@ -1,4 +1,6 @@
 <?php
+
+
 	session_start();
 	$_SESSION['IN_START'] = "started";
 	$mysql = 0;
@@ -14,6 +16,8 @@
 	}
 	else
 	{
+						ini_set('display_errors', 1);
+						error_reporting(E_ALL ^ E_NOTICE);
 		$mysql = 			mysql_connect("localhost","root","amdturion64","php");
 	mysql_select_db("php");
 		if(!$mysql)
@@ -26,7 +30,7 @@
 //if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 //{
 
-	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=66  && isset($mysql) && $mysql)
+	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($mysql) && $mysql)
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		$result = mysql_query($sql);
@@ -92,7 +96,7 @@ require("template.php");
 
 if(isset($_POST['partiallyComplete']) && isset($_POST['name']) && isset($_GET['tnum']))
 		{
-if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
+if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 112)
 		{
 		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".$_POST['name']."','".$_POST['comments']."','2')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
@@ -116,7 +120,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 			if(isset($_POST['partiallyComplete']) && isset($_POST['name']) && $_POST['name'] == "")			{
 			//echo("<h2><p align=\"center\"><font color=\"red\">**please enter a name**</font></p></h2>");
 			}
-			if(isset($_GET['tnum']) && ($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66))
+			if(isset($_GET['tnum']) && ($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 112))
 			{
 				//echo("<h2><p align=\"center\"><font color=\"red\">**sorry your territory number is out of range**</font></p></h2>");
 
@@ -129,7 +133,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 
 	if(isset($_POST['complete']) && isset($_POST['name']) && isset($_GET['tnum']))
 	{
-		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
+		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 112)
 		{
 		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".addslashes($_POST['name'])."','".addslashes($_POST['comments'])."','1')";
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
@@ -152,7 +156,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 			{
 			echo("<h2><p align=\"center\"><font color=\"red\">**please enter a name**</font></p></h2>");
 			}
-			if($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] > 66)
+			if($_GET['tnum'] == "" || $_GET['tnum'] <=0 || $_GET['tnum'] >112)
 			{
 				echo("<h2><p align=\"center\"><font color=\"red\">**sorry your territory number is out of range**</font></p></h2>");
 
@@ -235,10 +239,11 @@ $GLOBALS['output'] = str_replace("<!--{[output]}-->","<br/><table align=\"top\" 
 <td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group7_output]}--></table>\n</td>
 <td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group8_output]}--></table>\n</td>
 <td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group9_output]}--></table>\n</td>
-<td valign=\"top\" text-align=\"top\"\">\n<table align=\"top\" style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group10_output]}--></table>\n</td>
+<td text-align=\"top\"\">\n<table style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group10_output]}--></table>\n</td>
+<td valign=\"top\" text-align=\"top\"\">\n<table align=\"top\" style=\"width:75px;padding:0;margin:0;border-collapse:separate\">\n<!--{[group11_output]}--></table>\n</td>
 </tr></table><!--{[output]}-->",$GLOBALS['output']);
 
-for($i = 0; $i < 7; $i++)
+for($i = 0; $i < 11; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -268,7 +273,7 @@ else
 $GLOBALS['output'] = str_replace("<!--{[group1_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group1_output]}-->",$GLOBALS['output']);
 }
 
-for($i = 7; $i < 14; $i++)
+for($i = 11; $i < 22; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
@@ -297,7 +302,7 @@ else
 	$GLOBALS['output'] = str_replace("<!--{[group2_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group2_output]}-->",$GLOBALS['output']);
 }
 
-for($i = 14; $i < 21; $i++)
+for($i = 22; $i < 33; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
@@ -326,7 +331,7 @@ else
 	$GLOBALS['output'] = str_replace("<!--{[group3_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group3_output]}-->",$GLOBALS['output']);
 }
 
-for($i = 21; $i < 28; $i++)
+for($i = 33; $i < 44; $i++)
 {
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
 {
@@ -357,7 +362,7 @@ else
 
 }
 
-for($i = 28; $i < 35; $i++)
+for($i = 44; $i < 55; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -388,7 +393,7 @@ else
 }
 
 
-for($i = 35; $i < 42; $i++)
+for($i = 55; $i < 66; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -419,7 +424,7 @@ else
 }
 
 
-for($i = 42; $i < 49; $i++)
+for($i = 66; $i < 77; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -450,7 +455,7 @@ else
 }
 
 
-for($i = 49; $i < 56; $i++)
+for($i = 77; $i < 88; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -481,7 +486,7 @@ else
 }
 
 
-for($i = 56; $i < 63; $i++)
+for($i = 88; $i < 99; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -512,7 +517,7 @@ else
 }
 
 
-for($i = 63; $i < 66; $i++)
+for($i = 99; $i < 110; $i++)
 {
 
 if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
@@ -550,6 +555,48 @@ else
 {
 		$GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Unassigned<br/>",$GLOBALS['output']);
 }
+
+
+for($i = 110; $i < 112; $i++)
+{
+
+if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "1")
+{
+	$statusColor = "<td style=\"background-color:green;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
+}
+else if(isset($GLOBALS['status'][$i+1]) && $GLOBALS['status'][$i+1] == "2")
+{
+	$statusColor = "<td style=\"background-color:yellow;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
+}
+else
+{
+	$statusColor = "<td style=\"background-color:red;height:50px;width:50px;text-align:center;<!--{[border]}-->\">";
+
+}
+
+if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	solid black;height:50px;width:50px",$statusColor);
+}
+else
+{
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed black;height:50px;width:50px",$statusColor);
+}
+
+
+	$GLOBALS['output'] = str_replace("<!--{[group11_output]}-->","<tr>".$statusColor."<a href=\"?tnum=".($i + 1)."\">".($i + 1)."</a></td></tr>\n<!--{[group11_output]}-->",$GLOBALS['output']);
+}
+
+if(isset($_GET['tnum']) && isset($GLOBALS['checkoutname'][$_GET['tnum']]))
+{
+	$GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Assigned to: ".$GLOBALS['checkoutname']	[$_GET['tnum']]."<br/>",$GLOBALS['output']);
+}
+else
+{
+		$GLOBALS['output'] = str_replace("<!--{[assigned]}-->","Unassigned<br/>",$GLOBALS['output']);
+}
+
+
 
 		if(isset($mysql) && $mysql)
 		{
