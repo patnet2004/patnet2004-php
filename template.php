@@ -48,7 +48,7 @@ else
 	$disabled = "";
 } 
 */
-if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 66)
+if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 112)
 {
 
 $GLOBALS['output'] = "
