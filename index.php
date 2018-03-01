@@ -83,57 +83,61 @@ if($dbmysql->connect_errno > 0){
 		{
 			echo($sql);
 		}
-		while($row = mysql_fetch_row($result))
+		while($row = mysqli_fetch_row($result))
 		{
 		//echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
 
-		if(isset($GLOBALS['completeComment']) && $row[2] == "1")
-		{
-			$GLOBALS['completeComment']=$GLOBALS['completeComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
-		}
-		else if($row[2] == "1")
-		{
-			$GLOBALS['completeComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
-		}
-		else
-		{
-		}
-
-	if(isset($GLOBALS['partialComment']) && $row[2] == "2")
-		{
-			$GLOBALS['partialComment']=$GLOBALS['partialComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
-		}
-		else if($row[2] == "2")
-		{
-			$GLOBALS['partialComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
-		}
-		else
-		{
-		}
-
-
-		if($row[2] == "1")
-		{
-			$GLOBALS['completed'] = "completed";
-			//$GLOBALS['disabled'] = "disabled";
-		}
-		else if($row[2] == "2")
-		{
-			if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
+			if(isset($GLOBALS['completeComment']) && $row[2] == "1")
 			{
+				$GLOBALS['completeComment']=$GLOBALS['completeComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+			}
+			else if($row[2] == "1")
+			{
+				$GLOBALS['completeComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+			}
+			else
+			{
+			}
+
+			if(isset($GLOBALS['partialComment']) && $row[2] == "2")
+			{
+				$GLOBALS['partialComment']=$GLOBALS['partialComment']."\n".$row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+			}
+			else if($row[2] == "2")
+			{
+				$GLOBALS['partialComment'] = $row[3]."\n\n".$row[0].":\n----------\n".$row[1]."\n";
+			}
+			else
+			{
+			}
+
+
+			if($row[2] == "1")
+			{
+				$GLOBALS['completed'] = "completed";
+				//$GLOBALS['disabled'] = "disabled";
+			}
+			else if($row[2] == "2")
+			{
+				if(isset($GLOBALS['completed']) && $GLOBALS['completed'] == "completed")
+				{
 				
+				}
+				else
+				{
+					$GLOBALS['completed'] = "partial";
+				}
 			}
+			else
 			{
-				$GLOBALS['completed'] = "partial";
+				$GLOBALS['completed'] = "";
+				//$GLOBALS['disabled'] = "";
 			}
+
 		}
-		else
-		{
-			$GLOBALS['completed'] = "";
-			//$GLOBALS['disabled'] = "";
-		}
-		}
+		mysqli_free_result($result);
 	}
+
 
 require("template.php");
 
