@@ -45,6 +45,10 @@ $dbmysql = new mysqli("us-cdbr-iron-east-05.cleardb.net", "b37499699241ed", "65e
 if($dbmysql->connect_errno > 0){
     die('Unable to connect to database [' . $dbmysql->connect_error . ']');
 }
+
+$results = $dbmysql->query("show tables");
+echo("tables".mysqli_fetch_row($results)[0]);
+
 /**
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
