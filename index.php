@@ -74,7 +74,7 @@ if($dbmysql->connect_errno > 0){
 //if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 //{
 
-	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($mysql) && $mysql)
+	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($dbmysql) && $dbmysql->connect_errno)
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		//$result = mysql_query($sql);
@@ -148,7 +148,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo($sql);
 		//echo("<br/>");
 		//echo("Campaign begins 6-19-2015!");
-			if(isset($mysql) && $mysql)
+			if(isset($dbmysql) && $dbmysql->connect_errno)
 			{
 				//$results = mysql_query($sql);
 				$results = $dbmysql->query($sql);
@@ -186,7 +186,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo($sql);
 		//echo("<br/>");
 		//echo("Campaign begins 6-19-2015!");
-			if(isset($mysql) && $mysql)
+			if(isset($dbmysql) && $dbmysql->connect_errno)
 			{
 				//$results = mysql_query($sql);
 				$result = $dbmysql->query($sql);
@@ -226,7 +226,7 @@ if(isset($GLOBALS['partialComment']))
 $GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->","",$GLOBALS['output']);
 
 
-if(isset($mysql) && $mysql)
+if(isset($dbmysql->connect_errno) && $dbmysql->connect_errno)
 {
 
 
@@ -535,7 +535,7 @@ else
 
 
 
-		if(isset($mysql) && $mysql)
+		if(isset($dbmysql) && $dbmysql->connect_errno)
 		{
 
 			$sql = "SELECT DISTINCT `tNum` FROM `territories`";
@@ -589,8 +589,8 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Partially completed:
 //{
 //	die("Campaign begins 2-27-2016!");
 //}
-	if(isset($mysql) && $mysql)
+	if(isset($dbmysql) && $dbmysql->connect_errno)
 	{
-		mysql_close($mysql);
+		//mysql_close($mysql);
 	}
 ?>
