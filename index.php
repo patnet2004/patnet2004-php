@@ -1,13 +1,55 @@
 <?php
 
-
 	session_start();
 	$_SESSION['IN_START'] = "started";
 	$mysql = 0;
+
+
+//Get Heroku ClearDB connection information
+
+
+
+$cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$cleardb_server   = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db       = substr($cleardb_url["path"],1);
+
+$active_group = 'default';
+$query_builder = TRUE;
+
+$db['default'] = array(
+    'dsn'   => '',
+    'hostname' => $cleardb_server,
+    'username' => $cleardb_username,
+    'password' => $cleardb_password,
+    'database' => $cleardb_db,
+    'dbdriver' => 'mysqli',
+    'dbprefix' => '',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => '',
+    'encrypt' => FALSE,
+    'compress' => FALSE,
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+);
+
+
+$dbmysql = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password'], $db['default']['database']);
+if($dbmysql->connect_errno > 0){
+    die('Unable to connect to database [' . $dbmysql->connect_error . ']');
+}
+/**
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
 		$mysql = 			mysql_connect($_ENV['OPENSHIFT_MYSQL_DB_HOST'],"adminI5D52Su","yeLsP315lLBv","php");
-	mysql_select_db("php");
+	//mysql_select_db("php");
 		if(!$mysql)
 		{
 			die("failed to reach db please contact Patrick McDermott at 951-675-6109, Thanks.");
@@ -18,14 +60,16 @@
 	{
 						ini_set('display_errors', 1);
 						error_reporting(E_ALL ^ E_NOTICE);
-		$mysql = 			mysql_connect("localhost","root","amdturion64","php");
-	mysql_select_db("php");
+		$mysql = 			mysqli_connect("localhost","root","amdturion64","php");
+	//mysql_select_db("php");
 		if(!$mysql)
 		{
 			die("failed to reach db please contact Patrick McDermott at 951-675-6109, Thanks.");
 		}
 
 	}
+**/
+
 
 //if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 //{
@@ -33,7 +77,8 @@
 	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($mysql) && $mysql)
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='".$_GET['tnum']."'";
-		$result = mysql_query($sql);
+		//$result = mysql_query($sql);
+		$result = $dbmysql->query($sql);
 		if(!$result)
 		{
 			echo($sql);
@@ -105,7 +150,8 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo("Campaign begins 6-19-2015!");
 			if(isset($mysql) && $mysql)
 			{
-				$results = mysql_query($sql);
+				//$results = mysql_query($sql);
+				$results = $dbmysql->query($sql);
 				if($results)
 				{
 				//echo("Territory marked completed!<br/>");
@@ -142,7 +188,8 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo("Campaign begins 6-19-2015!");
 			if(isset($mysql) && $mysql)
 			{
-				$results = mysql_query($sql);
+				//$results = mysql_query($sql);
+				$result = $dbmysql->query($sql);
 				if($result)
 				{
 				//echo("Territory marked completed!<br/>");
@@ -184,7 +231,8 @@ if(isset($mysql) && $mysql)
 
 
 $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
-	$results = mysql_query($sql);
+	//$results = mysql_query($sql);
+	$results = $dbmysql->query($sql);
 	if($results)
 	{
 		while($row = mysql_fetch_row($results))
@@ -195,7 +243,8 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 	}
 
 	$sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='1'";
-	$results = mysql_query($sql);
+	//$results = mysql_query($sql);
+	$results = $dbmysql->query($sql);
 	if($results)
 	{
 		while($row = mysql_fetch_row($results))
@@ -206,7 +255,8 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 	}
 
 	$sql = "SELECT DISTINCT `tNum`,`tName` FROM `tcheckout`";
-	$results = mysql_query($sql);
+	$results = $dbmysql->query($sql);
+	//$results = mysql_query($sql);
 	if($results)
 	{
 		while($row = mysql_fetch_row($results))
@@ -489,7 +539,8 @@ else
 		{
 
 			$sql = "SELECT DISTINCT `tNum` FROM `territories`";
-			$results = mysql_query($sql);
+			//$results = mysql_query($sql);
+			$results = $dbmysql->query($sql);
 			$count = 0;
 			while($row = mysql_fetch_row($results))
 			{
@@ -501,7 +552,8 @@ else
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned: ".$count."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
 			$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='1'";
-			 $results = mysql_query($sql);
+			//$results = mysql_query($sql);
+			$results = $dbmysql->query($sql);
 			$row = mysql_fetch_row($results);
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
