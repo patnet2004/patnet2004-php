@@ -41,7 +41,7 @@ $db['default'] = array(
 );
 
 
-$dbmysql = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password'], $db['default']['database']);
+$dbmysql = new mysqli("us-cdbr-iron-east-05.cleardb.net", "b37499699241ed", "65e8a140", "heroku_b21d4843ebabccb");
 if($dbmysql->connect_errno > 0){
     die('Unable to connect to database [' . $dbmysql->connect_error . ']');
 }
