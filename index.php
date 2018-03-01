@@ -239,11 +239,12 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 	$results = $dbmysql->query($sql);
 	if($results)
 	{
-		while($row = mysql_fetch_row($results))
+		while($row = mysqli_fetch_row($results))
 		{
 			$GLOBALS['status'][$row[0]] = "2";
 				//echo($row[0]."<br/>");
 		}
+		mysqli_free_result($results);
 	}
 
 	$sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='1'";
@@ -251,11 +252,12 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 	$results = $dbmysql->query($sql);
 	if($results)
 	{
-		while($row = mysql_fetch_row($results))
+		while($row = mysqli_fetch_row($results))
 		{
 			$GLOBALS['status'][$row[0]] = "1";
 				//echo($row[0]."<br/>");
 		}
+		mysqli_free_result($results);
 	}
 
 	$sql = "SELECT DISTINCT `tNum`,`tName` FROM `tcheckout`";
@@ -263,12 +265,13 @@ $sql = "SELECT DISTINCT `tNum` FROM `territories` WHERE `tComplete` ='2'";
 	//$results = mysql_query($sql);
 	if($results)
 	{
-		while($row = mysql_fetch_row($results))
+		while($row = mysqli_fetch_row($results))
 		{
 			$GLOBALS['checkout'][$row[0]] = "1";
 			$GLOBALS['checkoutname'][$row[0]] = $row[1];
 				//echo($row[0]."<br/>");
 		}
+		mysqli_free_result($results);
 	}
 
 	//echo("<br/>");
@@ -546,7 +549,7 @@ else
 			//$results = mysql_query($sql);
 			$results = $dbmysql->query($sql);
 			$count = 0;
-			while($row = mysql_fetch_row($results))
+			while($row = mysqli_fetch_row($results))
 			{
 				$count = $count + 1;
 				
@@ -558,7 +561,7 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Territoies scanned: 
 			$sql = "SELECT COUNT(`tComplete`) FROM `territories` WHERE `tComplete`='1'";
 			//$results = mysql_query($sql);
 			$results = $dbmysql->query($sql);
-			$row = mysql_fetch_row($results);
+			$row = mysqli_fetch_row($results);
 			
 $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Fully Completed: ".$row[0]."<br/><!--{[count_update]}-->",$GLOBALS['output']);
 
