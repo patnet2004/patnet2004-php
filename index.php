@@ -47,7 +47,7 @@ if($dbmysql->connect_errno > 0){
 }
 
 $results = $dbmysql->query("SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='1'");
-echo("tables".mysqli_fetch_row($results)[0]);
+//echo("tables".mysqli_fetch_row($results)[0]);
 mysqli_free_result($results);
 /**
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
