@@ -152,7 +152,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo($sql);
 		//echo("<br/>");
 		//echo("Campaign begins 6-19-2015!");
-			if(isset($dbmysql) && $dbmysql->connect_errno)
+			if(isset($dbmysql))
 			{
 				//$results = mysql_query($sql);
 				$results = $dbmysql->query($sql);
@@ -190,7 +190,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo($sql);
 		//echo("<br/>");
 		//echo("Campaign begins 6-19-2015!");
-			if(isset($dbmysql) && $dbmysql->connect_errno)
+			if(isset($dbmysql) )
 			{
 				//$results = mysql_query($sql);
 				$result = $dbmysql->query($sql);
@@ -230,7 +230,7 @@ if(isset($GLOBALS['partialComment']))
 $GLOBALS['output'] = str_replace("<!--{[partial_comments]}-->","",$GLOBALS['output']);
 
 
-if(isset($dbmysql->connect_errno) && $dbmysql->connect_errno)
+if(isset($dbmysql))
 {
 
 
@@ -542,7 +542,7 @@ else
 
 
 
-		if(isset($dbmysql) && $dbmysql->connect_errno)
+		if(isset($dbmysql))
 		{
 
 			$sql = "SELECT DISTINCT `tNum` FROM `territories`";
@@ -596,7 +596,7 @@ $GLOBALS['output'] = str_replace("<!--{[count_update]}-->","Partially completed:
 //{
 //	die("Campaign begins 2-27-2016!");
 //}
-	if(isset($dbmysql) && $dbmysql->connect_errno)
+	if(isset($dbmysql))
 	{
 		//mysql_close($mysql);
 	}
