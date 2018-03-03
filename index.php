@@ -48,7 +48,7 @@ if($dbmysql->connect_errno > 0){
 
 $results = $dbmysql->query("SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='1'");
 //echo("tables".mysqli_fetch_row($results)[0]);
-mysqli_free_result($results);
+//mysqli_free_result($results);
 /**
 	if(isset($_ENV['OPENSHIFT_MYSQL_DB_HOST']))
 	{
@@ -78,15 +78,11 @@ mysqli_free_result($results);
 //if(isset($_GET['preview']) && $_GET['preview'] == "patnet2004")
 //{
 
-	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($dbmysql) && $dbmysql->connect_errno)
+	if(isset($_GET['tnum']) && is_numeric($_GET['tnum']) && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <=112  && isset($dbmysql))
 	{
 		$sql = "SELECT `tName`,`tComment`,`tComplete`,`tDate` FROM territories WHERE tNum='".$_GET['tnum']."'";
 		//$result = mysql_query($sql);
 		$result = $dbmysql->query($sql);
-		if(!$result)
-		{
-			echo($sql);
-		}
 		while($row = mysqli_fetch_row($result))
 		{
 		//echo($row[0]."<br/>".$row[1]."<br/>".$row[2]);
