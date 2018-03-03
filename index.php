@@ -349,7 +349,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -378,7 +378,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -407,7 +407,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -439,7 +439,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -470,7 +470,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -501,7 +501,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
@@ -532,7 +532,7 @@ if(isset($GLOBALS['checkout'][$i+1]) && $GLOBALS['checkout'][$i+1])
 }
 else
 {
-	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px",$statusColor);
+	$statusColor = str_replace("<!--{[border]}-->","border:2px 	dashed grey;height:50px;width:50px;background-color:#ff9999;",$statusColor);
 }
 
 
