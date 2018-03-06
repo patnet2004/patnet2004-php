@@ -141,7 +141,7 @@ name=\"complete\" value=\"Mark Fully Complete\" ".$disabled."/>
 </tr>
 </table>
 <br/>
-<p style=\"font-size:16px; font-style: italic;\">Please only mark a territory as &#34;partially complete&#34; if you feel you&#39;re unable to finish the territory before the end of the campaign&#44; this will notify us to reassign the territory to someone that is able to complete it	&#44; also leave detailed comments on what &#34;was&#34; and &#34;wasn&#39;t&#34; worked &#44; thanks&#33;</p>
+<p style=\"font-size:medium; font-style: italic;\">Please only mark a territory as &#34;partially complete&#34; if you feel you&#39;re unable to finish the territory before the end of the campaign&#44; this will notify us to reassign the territory to someone that is able to complete it	&#44; also leave detailed comments on what &#34;was&#34; and &#34;wasn&#39;t&#34; worked &#44; thanks&#33;</p>
 <br/>
 <br/>
 </td>
