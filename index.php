@@ -185,19 +185,33 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 	{
 		if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tnum'] <= 112)
 		{
-		$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".addslashes($_POST['name'])."','".addslashes($_POST['comments'])."','1')";
+
 		//echo(	$_POST['complete']."<br/>".$_POST['name']);
 		//echo($sql);
 		//echo("<br/>");
 		//echo("Campaign begins 6-19-2015!");
 			if(isset($dbmysql) )
 			{
-				//$results = mysql_query($sql);
-				$result = $dbmysql->query($sql);
-				if($result)
+				$sql = "SELECT * FROM territories WHERE tName='".$_POST['name']."' and tnum='".$_GET['tnum']."'";
+				$check = $dbmysql->query($sql);
+				$checkrows = mysqli_num_rows($check);
+				if($checkrows > 0)
 				{
-				//echo("Territory marked completed!<br/>");
-					header('Location:'.$_SERVER['REQUEST_URI']);
+					//double entry...	
+					header('Location:'.$_SERVER['REQUEST_URI']);	
+				}
+				else
+				{
+		
+					$sql = "INSERT INTO territories (`tDate`,`tNum`,`tName`,`tComment`,`tComplete`) VALUES('".date("Y-m-d H:i:s")."','".$_GET['tnum']."','".addslashes($_POST['name'])."','".addslashes($_POST['comments'])."','1')";
+				
+					//$results = mysql_query($sql);
+					$result = $dbmysql->query($sql);
+					if($result)
+					{
+					//echo("Territory marked completed!<br/>");
+						header('Location:'.$_SERVER['REQUEST_URI']);
+					}
 				}
 			}
 		}
