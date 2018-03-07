@@ -192,7 +192,7 @@ if($_POST['name'] != "" && $_GET['tnum'] != "" && $_GET['tnum'] > 0 && $_GET['tn
 		//echo("Campaign begins 6-19-2015!");
 			if(isset($dbmysql) )
 			{
-				$sql = "SELECT * FROM territories WHERE tName='".$_POST['name']."' and tnum='".$_GET['tnum']."'";
+				$sql = "SELECT * FROM territories WHERE tnum='".$_GET['tnum']."' and tcomplete='1'";
 				$check = $dbmysql->query($sql);
 				$checkrows = mysqli_num_rows($check);
 				if($checkrows > 0)
