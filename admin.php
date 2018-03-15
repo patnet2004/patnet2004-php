@@ -128,6 +128,18 @@ if($_GET['pass'] != $password)
 	die("");
 }
 
+if(isset($_POST['submit']) && $_POST['submit'] && isset($_POST['tname']) && isset($_POST['tnum']) && $_POST['tname'] != "" && $_POST['tnum'] != "")
+{
+	$sql = "INSERT INTO tcheckout (`tname`, `tnum`) VALUES ('".$_POST['tname']."','".$_POST['tnum']."')";
+	if($dbmysql->query($sql) === TRUE)
+	{
+		echo($_POST['tname']."assigned territory #".$_POST['tnum']."<br/>");
+	}
+	else
+	{
+		echo "Error: " . $sql . "<br>" . $dbmysql->error;
+	}
+}
 
 $sql = "SELECT `tnum` FROM territories WHERE `tcomplete`= 1";
 $result = $dbmysql->query($sql);
@@ -178,6 +190,9 @@ while($row = mysqli_fetch_row($result))
 	$GLOBALS['output'] = str_replace("<!--{[tnum]}-->","", $GLOBALS['output']);
 }
 mysqli_free_result($result);
+
+$GLOBALS['output'] = str_replace("<!--{[output]}-->","<p><b>Assign:</b></p><p/><form action=\"\" method=\"post\">Name:<br/> <input type=\"text\" name=\"tname\"><br>Number:<br/> <input type=\"text\" name=\"tnum\"><br/><br/><input type=\"submit\" value=\"Submit\" name=\"submit\">
+</form></p><!--{[output]}-->",$GLOBALS['output']);
 
 
 echo($GLOBALS['output']);
