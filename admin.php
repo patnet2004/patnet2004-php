@@ -9,11 +9,6 @@ if(!isset($_GET['pass']))
 	die("");
 }
 
-if($_GET['pass'] != md5("amdturion64"))
-{
-	die("");
-}
-
 
 //Get Heroku ClearDB connection information
 
@@ -119,6 +114,21 @@ $GLOBALS['output'] = "
 	</body>
 	</html>
 ";
+
+$sql = "SELECT `key` FROM secrets WHERE `name`= 'password'";
+$result = $dbmysql->query($sql);
+$password;
+while($row = mysqli_fetch_row($result))
+{
+	$password = $row[0];	
+}
+
+if($_GET['pass'] != $password)
+{
+	die("");
+}
+
+
 $sql = "SELECT `tnum` FROM territories WHERE `tcomplete`= 1";
 $result = $dbmysql->query($sql);
 $complete;
